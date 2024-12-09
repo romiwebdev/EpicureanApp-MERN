@@ -26,4 +26,14 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get("/verify", async (req, res) => {
+  const { isAuthenticated } = req.body;
+  if (isAuthenticated) {
+    res.status(200).json({ message: "User is authenticated" });
+  } else {
+    res.status(401).json({ message: "User is not authenticated" });
+  }
+});
+
+
 module.exports = router;

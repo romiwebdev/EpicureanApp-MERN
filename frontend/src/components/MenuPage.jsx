@@ -661,7 +661,7 @@ function MenuPage() {
         lineHeight: '1.8',
       }}>
         <p>📞 +62 822-4462-3402</p>
-        <p>✉️ info@culinarydelights.com</p>
+        <p>✉️ rominmuh230@gmail.com</p>
         <p>📍 Jl. Raya Kuliner No. 123, Bojonegoro</p>
       </div>
     </motion.div>

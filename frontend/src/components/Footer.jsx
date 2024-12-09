@@ -7,9 +7,11 @@ import {
   FaMapMarkerAlt, 
   FaPhoneAlt, 
   FaEnvelope,
-  FaPaperPlane
+  FaPaperPlane,
+  FaUser,
+  FaLinkedin, 
+  FaGithub
 } from 'react-icons/fa';
-
 const Footer = () => {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -40,21 +42,21 @@ const Footer = () => {
     }, 3000);
   };
 
+
   const socialLinks = [
     { 
       icon: <FaInstagram />, 
-      link: '#', 
+      link: 'https://instagram.com/romynn10', 
       color: '#E1306C' 
+    },{ 
+      icon: <FaLinkedin />, 
+      link: 'https://linkedin.com/in/romi-webdev', 
+      color: '#0077B5' 
     },
     { 
-      icon: <FaFacebookF />, 
-      link: '#', 
-      color: '#3B5998' 
-    },
-    { 
-      icon: <FaTwitter />, 
-      link: '#', 
-      color: '#1DA1F2' 
+      icon: <FaUser />, 
+      link: 'https://romifullstack.vercel.app', 
+      color: '#4CAF50' 
     }
   ];
 
@@ -73,8 +75,8 @@ const Footer = () => {
           transition={{ type: "spring", stiffness: 300 }}
         >
           <div style={styles.logo}>
-            Culinary
-            <span style={styles.logoHighlight}>Delights</span>
+          Epicurean
+            <span style={styles.logoHighlight}>Culinary</span>
           </div>
           <p style={styles.brandDescription}>
             Menjelajahi dunia citarasa melalui pengalaman kuliner yang tak terlupakan.
@@ -90,8 +92,8 @@ const Footer = () => {
           <h4 style={styles.sectionTitle}>Navigasi</h4>
           {[
             { label: 'Beranda', path: '/' },
-            { label: 'Menu', path: '/menu' },
-            { label: 'Contact', path: '/contact' },
+            { label: 'Menu', path: '#menu' },
+            { label: 'Contact', path: '#contact' },
           ].map((link, index) => (
             <motion.a 
               key={index}
@@ -151,28 +153,20 @@ const Footer = () => {
           </form>
 
           {/* Social Media */}
-          <div style={styles.socialIcons}>
-            {socialLinks.map((social, index) => (
-              <motion.a
-                key={index}
-                href={social.link}
-                style={{
-                  ...styles.socialIcon,
-                  color: social.color
-                }}
-                whileHover={{ 
-                  scale: 1.2, 
-                  rotate: 360,
-                }}
-                transition={{ 
-                  type: "spring", 
-                  stiffness: 300 
-                }}
-              >
-                {social.icon}
-              </motion.a>
-            ))}
-          </div>
+              {/* Social Media */}
+<div style={styles.socialIcons}>
+  {socialLinks.map((social, index) => (
+    <motion.a 
+      key={index} 
+      href={social.link} 
+      style={{ ...styles.socialIcon, color: social.color }} 
+      whileHover={{ scale: 1.2, rotate: 360 }}
+      transition={{ type: "spring", stiffness: 300 }}
+    >
+      {social.icon}
+    </motion.a>
+  ))}
+</div>
         </motion.div>
       </div>
 
@@ -184,7 +178,7 @@ const Footer = () => {
         transition={{ delay: 0.5 }}
       >
         <span style={styles.copyrightText}>
-          © 2024 Culinary Delights. All Rights Reserved.
+          © 2024 dibuat oleh Romi, untuk memenuhi tugas final project Talenthub.
         </span>
       </motion.div>
     </motion.footer>
