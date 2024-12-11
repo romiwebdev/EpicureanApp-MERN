@@ -1,7 +1,6 @@
-const express = require("express");
+import express from 'express';
 const router = express.Router();
-const Order = require("../models/Order");
-
+import Order from '../models/Order.js'; // Pastikan untuk menambahkan .js jika menggunakan ES Module
 // Endpoint untuk membuat pesanan baru
 router.post("/", async (req, res) => {
   const { name, address, items, total } = req.body;
@@ -73,4 +72,4 @@ router.get("/sales-report", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

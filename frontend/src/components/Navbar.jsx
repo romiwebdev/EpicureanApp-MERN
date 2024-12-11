@@ -1,19 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faHome, faUtensils, faEnvelope, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faShoppingCart,
+  faHome,
+  faUtensils,
+  faEnvelope,
+  faBars,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 
+// Daftar bagian untuk navigasi, termasuk ID, nama, dan ikon
 const sections = [
-  { id: 'home', name: 'Home', icon: faHome },
-  { id: 'menu', name: 'Menu', icon: faUtensils },
-  { id: 'contact', name: 'Contact', icon: faEnvelope },
+  { id: "home", name: "Home", icon: faHome },
+  { id: "menu", name: "Menu", icon: faUtensils },
+  { id: "contact", name: "Contact", icon: faEnvelope },
 ];
 
+// Komponen Navbar yang menerima jumlah item di keranjang dan fungsi untuk menangani klik keranjang
 const Navbar = ({ cartCount, onCartClick }) => {
-  const [activeItem, setActiveItem] = useState('home');
+  // State untuk menyimpan item aktif, status menu mobile, dan status ukuran layar
+  const [activeItem, setActiveItem] = useState("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
+  // Menggunakan useEffect untuk menangani perubahan ukuran layar dan scroll
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
 
@@ -24,7 +35,10 @@ const Navbar = ({ cartCount, onCartClick }) => {
         if (element) {
           const sectionTop = element.offsetTop - 100;
           const sectionHeight = element.offsetHeight;
-          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          if (
+            scrollPosition >= sectionTop &&
+            scrollPosition < sectionTop + sectionHeight
+          ) {
             setActiveItem(section.id);
             break;
           }
@@ -32,31 +46,38 @@ const Navbar = ({ cartCount, onCartClick }) => {
       }
     };
 
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('scroll', handleScroll);
+    // Menambahkan event listener untuk resize dan scroll
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll);
 
+    // Membersihkan event listener saat komponen di-unmount
     return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
+  // Menangani klik pada item navigasi
   const handleNavItemClick = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+      section.scrollIntoView({ behavior: "smooth" });
       setActiveItem(sectionId);
       setIsMobileMenuOpen(false);
     }
   };
 
-  const renderNavItems = () => (
+  // Merender item navigasi berdasarkan daftar sections
+  const renderNavItems = () =>
     sections.map((section) => (
       <motion.li
         key={section.id}
         style={{
           ...styles.navItem,
-          backgroundColor: activeItem === section.id ? 'rgba(76, 175, 80, 0.1)' : 'transparent',
+          backgroundColor:
+            activeItem === section.id
+              ? "rgba(76, 175, 80, 0.1)"
+              : "transparent",
         }}
         onClick={() => handleNavItemClick(section.id)}
         whileHover={{ scale: 1.1 }}
@@ -66,13 +87,13 @@ const Navbar = ({ cartCount, onCartClick }) => {
           icon={section.icon}
           style={{
             ...styles.navIcon,
-            color: activeItem === section.id ? '#00f5a0' : 'rgba(76, 175, 80, 0.7)',
+            color:
+              activeItem === section.id ? "#00f5a0" : "rgba(76, 175, 80, 0.7)",
           }}
         />
         <span style={styles.navItemText}>{section.name}</span>
       </motion.li>
-    ))
-  );
+    ));
 
   return (
     <motion.nav
@@ -116,9 +137,7 @@ const Navbar = ({ cartCount, onCartClick }) => {
         >
           <div style={styles.cartIconWrapper}>
             <FontAwesomeIcon icon={faShoppingCart} style={styles.cartIcon} />
-            {cartCount > 0 && (
-              <span style={styles.cartCount}>{cartCount}</span>
-            )}
+            {cartCount > 0 && <span style={styles.cartCount}>{cartCount}</span>}
           </div>
         </motion.div>
 
@@ -142,7 +161,7 @@ const Navbar = ({ cartCount, onCartClick }) => {
             style={styles.mobileNavList}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ type: 'spring', stiffness: 300 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
             {renderNavItems()}
           </motion.ul>
@@ -154,101 +173,101 @@ const Navbar = ({ cartCount, onCartClick }) => {
 
 const styles = {
   navbar: {
-    backgroundColor: 'rgba(22, 33, 62, 0.95)',
-    padding: '15px 0',
-    position: 'sticky',
+    backgroundColor: "rgba(22, 33, 62, 0.95)",
+    padding: "15px 0",
+    position: "sticky",
     top: 0,
     zIndex: 1000,
-    width: '100%',
-    backdropFilter: 'blur(10px)',
-    boxShadow: '0 4px 15px rgba(0, 245, 160, 0.1)',
+    width: "100%",
+    backdropFilter: "blur(10px)",
+    boxShadow: "0 4px 15px rgba(0, 245, 160, 0.1)",
   },
   navContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '90%',
-    maxWidth: '1200px',
-    margin: '0 auto',
-    padding: '0 15px',
-    boxSizing: 'border-box',
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "90%",
+    maxWidth: "1200px",
+    margin: "0 auto",
+    padding: "0 15px",
+    boxSizing: "border-box",
   },
   logoWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
   },
   logo: {
-    fontSize: '2.5rem',
-    fontWeight: '700',
-    backgroundImage: 'linear-gradient(45deg, #00f5a0, #00d9f5)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
+    fontSize: "2.5rem",
+    fontWeight: "700",
+    backgroundImage: "linear-gradient(45deg, #00f5a0, #00d9f5)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
   },
   logoSubtitle: {
-    color: 'rgba(255, 255, 255, 0.7)',
-    fontSize: '0.9rem',
+    color: "rgba(255, 255, 255, 0.7)",
+    fontSize: "0.9rem",
   },
   navList: {
-    display: 'flex',
-    listStyleType: 'none',
+    display: "flex",
+    listStyleType: "none",
     margin: 0,
     padding: 0,
-    gap: '30px',
+    gap: "30px",
   },
   navItem: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '10px 15px',
-    cursor: 'pointer',
-    transition: 'all 0.3s ease',
-    color: 'white',
+    display: "flex",
+    alignItems: "center",
+    padding: "10px 15px",
+    cursor: "pointer",
+    transition: "all 0.3s ease",
+    color: "white",
   },
   navIcon: {
-    marginRight: '10px',
-    fontSize: '1.2rem',
+    marginRight: "10px",
+    fontSize: "1.2rem",
   },
   cartContainer: {
-    position: 'relative',
-    cursor: 'pointer',
+    position: "relative",
+    cursor: "pointer",
   },
   cartIconWrapper: {
-    position: 'relative',
+    position: "relative",
   },
   cartIcon: {
-    color: '#00f5a0',
-    fontSize: '1.5rem',
+    color: "#00f5a0",
+    fontSize: "1.5rem",
   },
   cartCount: {
-    position: 'absolute',
-    top: '-8px',
-    right: '-8px',
-    backgroundColor: '#00f5a0',
-    color: '#16213e',
-    borderRadius: '50%',
-    width: '20px',
-    height: '20px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '0.8rem',
-    fontWeight: 'bold',
+    position: "absolute",
+    top: "-8px",
+    right: "-8px",
+    backgroundColor: "#00f5a0",
+    color: "#16213e",
+    borderRadius: "50%",
+    width: "20px",
+    height: "20px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "0.8rem",
+    fontWeight: "bold",
   },
   hamburgerMenu: {
-    fontSize: '1.5rem',
-    cursor: 'pointer',
+    fontSize: "1.5rem",
+    cursor: "pointer",
   },
   hamburgerIcon: {
-    color: 'white',
+    color: "white",
   },
   mobileNavList: {
-    position: 'absolute',
-    top: '100%',
+    position: "absolute",
+    top: "100%",
     left: 0,
-    width: '100%',
-    backgroundColor: 'rgba(22, 33, 62, 0.95)',
-    display: 'flex',
-    flexDirection: 'column',
-    listStyleType: 'none',
+    width: "100%",
+    backgroundColor: "rgba(22, 33, 62, 0.95)",
+    display: "flex",
+    flexDirection: "column",
+    listStyleType: "none",
     padding: 0,
     zIndex: 1000,
   },

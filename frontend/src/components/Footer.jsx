@@ -1,20 +1,9 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { 
-  FaInstagram, 
-  FaFacebookF, 
-  FaTwitter, 
-  FaMapMarkerAlt, 
-  FaPhoneAlt, 
-  FaEnvelope,
-  FaPaperPlane,
-  FaUser,
-  FaLinkedin, 
-  FaGithub
-} from 'react-icons/fa';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { FaInstagram, FaPaperPlane, FaUser, FaLinkedin } from "react-icons/fa";
 const Footer = () => {
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
 
   const validateEmail = (email) => {
@@ -24,17 +13,17 @@ const Footer = () => {
 
   const handleEmailSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!validateEmail(email)) {
-      setEmailError('Email tidak valid');
+      setEmailError("Email tidak valid");
       return;
     }
 
     // Simulasi pengiriman email
-    console.log('Email valid:', email);
+    console.log("Email valid:", email);
     setIsSubscribed(true);
-    setEmail('');
-    setEmailError('');
+    setEmail("");
+    setEmailError("");
 
     // Reset status berlangganan setelah 3 detik
     setTimeout(() => {
@@ -42,26 +31,26 @@ const Footer = () => {
     }, 3000);
   };
 
-
   const socialLinks = [
-    { 
-      icon: <FaInstagram />, 
-      link: 'https://instagram.com/romynn10', 
-      color: '#E1306C' 
-    },{ 
-      icon: <FaLinkedin />, 
-      link: 'https://linkedin.com/in/romi-webdev', 
-      color: '#0077B5' 
+    {
+      icon: <FaInstagram />,
+      link: "https://instagram.com/romynn10",
+      color: "#E1306C",
     },
-    { 
-      icon: <FaUser />, 
-      link: 'https://romifullstack.vercel.app', 
-      color: '#4CAF50' 
-    }
+    {
+      icon: <FaLinkedin />,
+      link: "https://linkedin.com/in/romi-webdev",
+      color: "#0077B5",
+    },
+    {
+      icon: <FaUser />,
+      link: "https://romifullstack.vercel.app",
+      color: "#4CAF50",
+    },
   ];
 
   return (
-    <motion.footer 
+    <motion.footer
       style={styles.footer}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -69,39 +58,40 @@ const Footer = () => {
     >
       <div style={styles.footerContent}>
         {/* Bagian Brand */}
-        <motion.div 
+        <motion.div
           style={styles.brandSection}
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
           <div style={styles.logo}>
-          Epicurean
+            Epicurean
             <span style={styles.logoHighlight}>Culinary</span>
           </div>
           <p style={styles.brandDescription}>
-            Menjelajahi dunia citarasa melalui pengalaman kuliner yang tak terlupakan.
+            Menjelajahi dunia citarasa melalui pengalaman kuliner yang tak
+            terlupakan.
           </p>
         </motion.div>
 
         {/* Navigasi Cepat */}
-        <motion.div 
+        <motion.div
           style={styles.quickLinks}
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
           <h4 style={styles.sectionTitle}>Navigasi</h4>
           {[
-            { label: 'Beranda', path: '/' },
-            { label: 'Menu', path: '#menu' },
-            { label: 'Contact', path: '#contact' },
+            { label: "Beranda", path: "/" },
+            { label: "Menu", path: "#menu" },
+            { label: "Contact", path: "#contact" },
           ].map((link, index) => (
-            <motion.a 
+            <motion.a
               key={index}
               href={link.path}
               style={styles.footerLink}
-              whileHover={{ 
-                x: 10, 
-                color: '#00d9f5' 
+              whileHover={{
+                x: 10,
+                color: "#00d9f5",
               }}
             >
               {link.label}
@@ -110,68 +100,62 @@ const Footer = () => {
         </motion.div>
 
         {/* Newsletter */}
-        <motion.div 
+        <motion.div
           style={styles.newsletterSection}
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
           <h4 style={styles.sectionTitle}>Newsletter</h4>
-          <form 
-            onSubmit={handleEmailSubmit} 
-            style={styles.newsletterForm}
-          >
+          <form onSubmit={handleEmailSubmit} style={styles.newsletterForm}>
             <div style={styles.inputWrapper}>
-              <input 
+              <input
                 type="email"
                 placeholder="Masukkan email Anda"
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
-                  setEmailError('');
+                  setEmailError("");
                 }}
                 style={{
                   ...styles.newsletterInput,
-                  borderColor: emailError ? 'red' : 'transparent'
+                  borderColor: emailError ? "red" : "transparent",
                 }}
                 required
               />
               {emailError && (
-                <div style={styles.errorMessage}>
-                  {emailError}
-                </div>
+                <div style={styles.errorMessage}>{emailError}</div>
               )}
             </div>
-            <motion.button 
+            <motion.button
               type="submit"
               style={styles.newsletterButton}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <FaPaperPlane style={{ marginRight: '10px' }} />
-              {isSubscribed ? 'Terima Kasih!' : 'Berlangganan'}
+              <FaPaperPlane style={{ marginRight: "10px" }} />
+              {isSubscribed ? "Terima Kasih!" : "Berlangganan"}
             </motion.button>
           </form>
 
-          {/* Social Media */}
-              {/* Social Media */}
-<div style={styles.socialIcons}>
-  {socialLinks.map((social, index) => (
-    <motion.a 
-      key={index} 
-      href={social.link} 
-      style={{ ...styles.socialIcon, color: social.color }} 
-      whileHover={{ scale: 1.2, rotate: 360 }}
-      transition={{ type: "spring", stiffness: 300 }}
-    >
-      {social.icon}
-    </motion.a>
-  ))}
-</div>
+          {/* Sosial Media */}
+          <div style={styles.socialIcons}>
+            {socialLinks.map((social, index) => (
+              <motion.a
+                key={index}
+                href={social.link}
+                style={{ ...styles.socialIcon, color: social.color }}
+                whileHover={{ scale: 1.2, rotate: 360 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                {social.icon}
+              </motion.a>
+            ))}
+          </div>
         </motion.div>
       </div>
 
       {/* Copyright */}
-      <motion.div 
+      <motion.div
         style={styles.copyright}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -209,9 +193,9 @@ const styles = {
     marginBottom: "15px",
   },
   logoHighlight: {
-    backgroundImage: 'linear-gradient(45deg, #00f5a0, #00d9f5)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
+    backgroundImage: "linear-gradient(45deg, #00f5a0, #00d9f5)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
     marginLeft: "10px",
   },
   brandDescription: {
@@ -221,9 +205,9 @@ const styles = {
   sectionTitle: {
     marginBottom: "20px",
     fontSize: "1.3rem",
-    backgroundImage: 'linear-gradient(45deg, #00f5a0, #00d9f5)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
+    backgroundImage: "linear-gradient(45deg, #00f5a0, #00d9f5)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
     fontWeight: "bold",
   },
   quickLinks: {
@@ -306,11 +290,11 @@ const styles = {
   copyrightText: {
     color: "rgba(255,255,255,0.6)",
     fontSize: "0.9rem",
-    backgroundImage: 'linear-gradient(45deg, #00f5a0, #00d9f5)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    backgroundSize: '200% auto',
-    animation: 'gradient-move 3s ease infinite',
+    backgroundImage: "linear-gradient(45deg, #00f5a0, #00d9f5)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    backgroundSize: "200% auto",
+    animation: "gradient-move 3s ease infinite",
   },
 };
 
@@ -338,20 +322,20 @@ const HoverLink = ({ children, style, ...props }) => {
           transformOrigin: "left",
         }}
         variants={{
-          hover: { 
+          hover: {
             scaleX: 1,
-            transition: { 
+            transition: {
               duration: 0.3,
-              ease: "easeOut" 
-            }
+              ease: "easeOut",
+            },
           },
-          initial: { 
+          initial: {
             scaleX: 0,
-            transition: { 
+            transition: {
               duration: 0.3,
-              ease: "easeOut" 
-            }
-          }
+              ease: "easeOut",
+            },
+          },
         }}
         initial="initial"
       />

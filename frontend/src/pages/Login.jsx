@@ -11,25 +11,36 @@ import {
   FaArrowLeft
 } from 'react-icons/fa';
 
+// Komponen Login untuk mengelola proses autentikasi pengguna
 function Login() {
+  // State untuk menyimpan username
   const [username, setUsername] = useState("");
+  // State untuk menyimpan password
   const [password, setPassword] = useState("");
+  // State untuk mengatur visibilitas password
   const [showPassword, setShowPassword] = useState(false);
+  // State untuk menyimpan pesan error
   const [error, setError] = useState("");
+  // Hook untuk navigasi
   const navigate = useNavigate();
 
+
+  // Fungsi untuk menangani proses login
   const handleLogin = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Mencegah reload halaman
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", {
+      // Mengirim permintaan login ke server
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`, {
         username,
-        password,
+        password, 
       });
+      // Jika autentikasi berhasil, simpan status dan navigasi ke dashboard
       if (response.data.isAuthenticated) {
         localStorage.setItem("isAuthenticated", "true");
         navigate("/dashboard");
       }
     } catch (err) {
+      // Menangani error jika login gagal
       setError("Invalid username or password");
     }
   };

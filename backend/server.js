@@ -1,19 +1,17 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const path = require("path");
-const connectDB = require("./config/db");
-const menuRoutes = require("./routes/menuRoutes"); // Route untuk menu
-const authRoutes = require("./routes/authRoutes"); // Route untuk login
-const orderRoutes = require("./routes/order"); // Route untuk order
-const User = require("./models/User");
+import dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import connectDB from './config/db.js'; // Pastikan untuk menambahkan .js jika menggunakan ES Module
+import menuRoutes from './routes/menuRoutes.js'; // Pastikan untuk menambahkan .js
+import authRoutes from './routes/authRoutes.js'; // Pastikan untuk menambahkan .js
+import orderRoutes from './routes/order.js'; // Pastikan untuk menambahkan .js
+import User from './models/User.js'; // Pastikan untuk menambahkan .js
 
-const app = express();
+dotenv.config(); // Memuat variabel lingkungan
+
+const app = express(); 
 const PORT = process.env.PORT || 5000;
-
-// Menambahkan middleware untuk melayani file statis
-app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Folder uploads dapat diakses
 
 // Middleware
 app.use(cors());
@@ -25,15 +23,14 @@ connectDB();
 // Fungsi untuk menambahkan user admin
 const seedAdminUser  = async () => {
   try {
-    // Cek apakah user admin sudah ada
-    const existingAdmin = await User.findOne({ username: "admin" });
+    const existingAdmin = await User.findOne({ username: process.env.ADMIN_USERNAME });
     if (!existingAdmin) {
       const adminUser  = new User({
-        username: "admin",
-        password: "admin123", // Password langsung (belum dienkripsi, ini sederhana)
+        username: process.env.ADMIN_USERNAME,
+        password: process.env.ADMIN_PASSWORD, 
       });
       await adminUser .save();
-      console.log("Admin user created: username=admin, password=admin123");
+      console.log(`Admin user created: username=${process.env.ADMIN_USERNAME}, password=${process.env.ADMIN_PASSWORD}`);
     } else {
       console.log("Admin user already exists.");
     }
@@ -46,23 +43,14 @@ const seedAdminUser  = async () => {
 seedAdminUser ();
 
 // Route
-app.use("/api/menu", menuRoutes); // Menyediakan route untuk menu
-app.use("/api/auth", authRoutes); // Route untuk login
-app.use("/api/order", orderRoutes); // Menyediakan route untuk order
+app.use("/api/menu", menuRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/order", orderRoutes);
 
 // Default endpoint
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
-
-// Koneksi ke MongoDB
-mongoose
-  .connect(process.env.MONGODB_URI || "mongodb://localhost/restaurant", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.log("Failed to connect to MongoDB:", err));
 
 // Jalankan server
 app.listen(PORT, () => {

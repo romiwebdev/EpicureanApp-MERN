@@ -1,31 +1,35 @@
 import React from "react";
 import html2canvas from 'html2canvas';
 
+// Komponen Receipt untuk menampilkan dan mengelola struk pesanan
 function Receipt({ order, closeModal }) {
+  // Fungsi untuk mencetak struk
   const handlePrint = () => {
-    const originalContents = document.body.innerHTML;
-    const receiptContent = document.getElementById("receipt").innerHTML;
+    const originalContents = document.body.innerHTML; // Menyimpan konten asli halaman
+    const receiptContent = document.getElementById("receipt").innerHTML; // Mengambil konten struk
     
-    document.body.innerHTML = receiptContent;
-    window.print();
+    document.body.innerHTML = receiptContent; // Mengganti konten halaman dengan struk
+    window.print(); // Memanggil dialog cetak
     
-    document.body.innerHTML = originalContents;
+    document.body.innerHTML = originalContents; // Mengembalikan konten asli setelah cetak
   };
 
+  // Fungsi untuk mengunduh struk sebagai gambar
   const handleDownloadImage = () => {
-    const receiptElement = document.getElementById("receipt");
+    const receiptElement = document.getElementById("receipt"); // Mengambil elemen struk
     
+    // Menggunakan html2canvas untuk mengonversi elemen menjadi gambar
     html2canvas(receiptElement, { 
-      scale: 3,
-      useCORS: true,
-      backgroundColor: null 
+      scale: 3, // Mengatur skala untuk kualitas gambar
+      useCORS: true, // Mengizinkan penggunaan CORS
+      backgroundColor: null // Mengatur latar belakang menjadi transparan
     }).then(canvas => {
-      const imageData = canvas.toDataURL("image/png");
+      const imageData = canvas.toDataURL("image/png"); // Mengonversi canvas menjadi data URL
       
-      const link = document.createElement('a');
-      link.download = `receipt_${order._id}.png`;
-      link.href = imageData;
-      link.click();
+      const link = document.createElement('a'); // Membuat elemen tautan untuk unduhan
+      link.download = `receipt_${order._id}.png`; // Menentukan nama file unduhan
+      link.href = imageData; // Mengatur href ke data URL
+      link.click(); // Memicu klik untuk mengunduh
     });
   };
 
