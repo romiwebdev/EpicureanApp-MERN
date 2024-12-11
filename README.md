@@ -129,9 +129,7 @@ Pastikan variabel `REACT_APP_BACKEND_URL` diakses di frontend menggunakan `proce
 ### Tampilan Mobile
 
 ![Screenshot 1](https://raw.githubusercontent.com/romiwebdev/EpicureanApp-MERN/refs/heads/main/imageFitur/menuMobile.png)
-
 ![Screenshot 2](https://raw.githubusercontent.com/romiwebdev/EpicureanApp-MERN/refs/heads/main/imageFitur/menuDashboardMobile.png)
-
 ![Screenshot 3](https://raw.githubusercontent.com/romiwebdev/EpicureanApp-MERN/refs/heads/main/imageFitur/laporanMobile.png)
 
 ## Lisensi
