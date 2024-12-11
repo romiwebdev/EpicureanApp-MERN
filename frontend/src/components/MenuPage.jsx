@@ -821,6 +821,10 @@ const styles = {
   container: {
     background: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
     minHeight: "100vh",
+    width: "100%", // Pastikan lebar 100% dari viewport
+    overflowX: "hidden", // Hilangkan scroll horizontal
+    margin: 0,
+    padding: 0,
   },
   heroSection: {
     backgroundImage:
@@ -830,10 +834,20 @@ const styles = {
     color: "white",
     textAlign: "center",
     padding: "100px 20px",
+    padding: "80px 20px", // Kurangi padding untuk layar kecil
+  display: "flex",
+  flexDirection: "column", // Pastikan elemen dalam hero teratur
+  justifyContent: "center",
+  alignItems: "center",
+  minHeight: "100vh", // Buat hero section memenuhi viewport
+  width: "100%", // Pastikan tidak melampaui lebar viewport
   },
   heroContent: {
     maxWidth: "800px",
     margin: "0 auto",
+    margin: "0 auto",
+    padding: "0 15px", // Tambahkan padding horizontal untuk layar kecil
+    wordWrap: "break-word", // Pastikan teks tidak menyebabkan overflow
   },
   heroTitle: {
     fontSize: "3.5rem",
@@ -870,6 +884,43 @@ const styles = {
     fontSize: "1.2rem",
     color: "#555",
   },
+
+  "@media (max-width: 768px)": {
+  heroTitle: {
+    fontSize: "2.5rem", // Ubah ukuran font untuk layar kecil
+  },
+  heroSubtitle: {
+    fontSize: "1.2rem", // Kurangi ukuran subtitle
+    marginBottom: "20px",
+  },
+  heroButton: {
+    padding: "10px 20px", // Kurangi padding tombol
+    fontSize: "1rem", // Kurangi ukuran font tombol
+  },
+  heroContent: {
+    maxWidth: "90%", // Sesuaikan lebar maksimum agar lebih cocok dengan layar kecil
+    padding: "0 10px", // Tambahkan lebih banyak padding horizontal
+  },
+  motionDiv: {
+    marginBottom: "20px", // Kurangi jarak antar elemen
+  },
+},
+"@media (max-width: 480px)": {
+  heroTitle: {
+    fontSize: "2rem", // Ukuran lebih kecil untuk layar sangat kecil
+  },
+  heroSubtitle: {
+    fontSize: "1rem",
+  },
+  heroButton: {
+    padding: "8px 16px",
+    fontSize: "0.9rem",
+  },
+  heroContent: {
+    padding: "0 5px",
+  },
+},
+
   menuSection: {
     display: "flex",
     flexWrap: "wrap",
