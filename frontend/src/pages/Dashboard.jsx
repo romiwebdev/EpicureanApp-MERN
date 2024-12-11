@@ -67,9 +67,9 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const [menuResponse, orderResponse, salesResponse] = await Promise.all([
-          axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/menu`),
-          axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/order`),
-          axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/order/sales-report`),
+          axios.get("https://epicurean-app-mern-server.vercel.app/api/menu"),
+          axios.get("https://epicurean-app-mern-server.vercel.app/api/order"),
+          axios.get("https://epicurean-app-mern-server.vercel.app/api/order/sales-report"),
         ]);
 
         setMenuItems(menuResponse.data);
@@ -100,8 +100,8 @@ function Dashboard() {
     e.preventDefault();
     try {
       const endpoint = isEditing
-      ? `${import.meta.env.VITE_BACKEND_URL}/api/menu/${currentMenuId}`
-      : `${import.meta.env.VITE_BACKEND_URL}/api/menu`;
+      ? "https://epicurean-app-mern-server.vercel.app/api/menu/${currentMenuId}"
+      : "https://epicurean-app-mern-server.vercel.app/api/menu";
 
       const method = isEditing ? axios.put : axios.post;
       const response = await method(endpoint, formData);
@@ -133,7 +133,7 @@ function Dashboard() {
   // Delete menu item
   const handleDeleteMenu = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/menu/${id}`);
+      await axios.delete(`https://epicurean-app-mern-server.vercel.app/api/menu/${id}`);
       const updatedMenuItems = menuItems.filter((item) => item._id !== id);
       setMenuItems(updatedMenuItems);
       setFilteredMenuItems(updatedMenuItems);
@@ -145,7 +145,7 @@ function Dashboard() {
   // Delete order
   const handleDeleteOrder = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/order/${id}`);
+      await axios.delete(`https://epicurean-app-mern-server.vercel.app/api/order/${id}`);
       const updatedOrders = orders.filter((order) => order._id !== id);
       setOrders(updatedOrders);
     } catch (error) {

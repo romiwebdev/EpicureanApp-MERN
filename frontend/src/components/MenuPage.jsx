@@ -29,7 +29,7 @@ function MenuPage() {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/menu`);
+        const response = await axios.get("https://epicurean-app-mern-server.vercel.app/api/menu");
         setMenuItems(response.data);
  
         // Ekstrak kategori unik dari menu
@@ -165,7 +165,7 @@ function MenuPage() {
         total: getTotalPrice(),
       };
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/order`,
+        "https://epicurean-app-mern-server.vercel.app/api/order",
         orderData
       );
       console.log("Order submitted:", response.data);
@@ -189,7 +189,7 @@ function MenuPage() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/contact`,
+        "https://epicurean-app-mern-server.vercel.app/api/contact",
         contactForm
       );
       alert("Pesan berhasil dikirim!");

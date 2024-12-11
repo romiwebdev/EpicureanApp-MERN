@@ -30,7 +30,7 @@ function Login() {
     e.preventDefault(); // Mencegah reload halaman
     try {
       // Mengirim permintaan login ke server
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`, {
+      const response = await axios.post("https://epicurean-app-mern-server.vercel.app/api/auth/login", {
         username,
         password, 
       });
