@@ -188,7 +188,7 @@ const styles = {
     maxWidth: "300px",
   },
   logo: {
-    fontSize: "2.5rem",
+    fontSize: "2rem",
     fontWeight: "bold",
     marginBottom: "15px",
   },
