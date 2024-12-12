@@ -241,7 +241,7 @@ const getResponsiveSize = (baseSize) => {
       id="home"
       style={{
         position: "relative",
-        marginTop: window.innerWidth <= 768 ? "-15%" : "-5%",
+        marginTop: window.innerWidth <= 768 ? "-20%" : "-5%",
         height: "100vh",
         width: "100%",
         display: "flex",
