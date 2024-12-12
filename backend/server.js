@@ -14,15 +14,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-
-// Middleware
-const corsOptions = {
-  origin: 'https://epicureanculinary.vercel.app', // Ganti dengan URL frontend Anda
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Metode yang diperbolehkan
-  allowedHeaders: ['Content-Type', 'Authorization'], // Header yang diizinkan
-  credentials: true // Jika Anda menggunakan cookies atau autentikasi
-};
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.json());
 
 // Hubungkan ke MongoDB
